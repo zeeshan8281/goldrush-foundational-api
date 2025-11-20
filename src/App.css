@@ -864,6 +864,34 @@ body::after {
   border-left: 4px solid var(--accent-green);
 }
 
+.nft-card {
+  border-left: 4px solid var(--accent-purple, #9d4edd);
+}
+
+.approval-card {
+  border-left: 4px solid var(--accent-red, #ef4444);
+}
+
+.block-card {
+  border-left: 4px solid var(--accent-blue, #3b82f6);
+}
+
+.log-card {
+  border-left: 4px solid var(--accent-orange, #f97316);
+}
+
+.holder-card {
+  border-left: 4px solid var(--accent-teal);
+}
+
+.price-card {
+  border-left: 4px solid var(--accent-yellow, #eab308);
+}
+
+.chain-card {
+  border-left: 4px solid var(--accent-pink, #ec4899);
+}
+
 .generic-card {
   border-left: 4px solid var(--accent-amber);
 }

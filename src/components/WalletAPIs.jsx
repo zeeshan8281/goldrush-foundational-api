@@ -48,6 +48,43 @@ const WalletAPIs = ({ apiKey }) => {
         onSubmit={(key, data) => apiService.getERC20Transfers(key, data.chainId, data.address, data)}
         apiKey={apiKey}
       />
+
+      <ApiTestForm
+        title="Get Historical Token Prices"
+        description="Retrieve historical price data for a token using ticker symbol (e.g., ETH, BTC, USDC). Note: This endpoint does not require chainId."
+        fields={[
+          { name: 'chainId', label: 'Chain ID (Not Used)', type: 'text', placeholder: 'e.g., 1 (Ethereum)', helpText: 'This field is kept for compatibility but not used by the API' },
+          { name: 'ticker', label: 'Ticker Symbol', type: 'text', required: true, placeholder: 'e.g., ETH, BTC, USDC' },
+          { name: 'from', label: 'From Date (Optional)', type: 'date', helpText: 'Start date for historical data (YYYY-MM-DD format)' },
+          { name: 'to', label: 'To Date (Optional)', type: 'date', helpText: 'End date for historical data (YYYY-MM-DD format)' },
+          { name: 'quoteCurrency', label: 'Quote Currency', type: 'text', placeholder: 'USD', helpText: 'Default: USD' },
+        ]}
+        onSubmit={(key, data) => apiService.getHistoricalTokenPrices(key, data.chainId, data.ticker, data)}
+        apiKey={apiKey}
+      />
+
+      <ApiTestForm
+        title="Get Pool Spot Prices"
+        description="Get current spot prices from DEX pools"
+        fields={[
+          { name: 'chainId', label: 'Chain ID', type: 'text', required: true, placeholder: 'e.g., 1 (Ethereum)' },
+          { name: 'ticker', label: 'Ticker Symbol', type: 'text', required: true, placeholder: 'e.g., ETH' },
+          { name: 'quoteCurrency', label: 'Quote Currency', type: 'text', placeholder: 'USD' },
+        ]}
+        onSubmit={(key, data) => apiService.getPoolSpotPrices(key, data.chainId, data.ticker, data)}
+        apiKey={apiKey}
+      />
+
+      <ApiTestForm
+        title="Get Resolved Address for Registered Address"
+        description="Resolve an ENS or other registered address to its canonical address"
+        fields={[
+          { name: 'chainId', label: 'Chain ID', type: 'text', required: true, placeholder: 'e.g., 1 (Ethereum)' },
+          { name: 'address', label: 'Address or ENS', type: 'text', required: true, placeholder: '0x... or example.eth' },
+        ]}
+        onSubmit={(key, data) => apiService.getResolvedAddress(key, data.chainId, data.address)}
+        apiKey={apiKey}
+      />
     </div>
   );
 };

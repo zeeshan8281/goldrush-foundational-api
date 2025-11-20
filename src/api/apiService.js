@@ -287,13 +287,18 @@ export const apiService = {
   getHistoricalTokenPrices: async (apiKey, chainId, ticker, params = {}) => {
     // Filter out path parameters
     const { chainId: _, ticker: __, ...queryParams } = params;
+    
+    // Correct endpoint format: /pricing/historical/{quote_currency}/{ticker_symbol}/
+    // Note: This endpoint does NOT use chainId in the path
+    const quoteCurrency = queryParams.quoteCurrency || 'USD';
     const queryString = buildQueryString({
       'from': queryParams.from || '',
       'to': queryParams.to || '',
-      'quote-currency': queryParams.quoteCurrency || 'USD',
     });
+    
+    // Correct endpoint: /v1/pricing/historical/{quote_currency}/{ticker_symbol}/
     const response = await api.get(
-      `/${chainId}/pricing/historical/${ticker}/?key=${apiKey}&${queryString}`
+      `/pricing/historical/${quoteCurrency}/${ticker}/?key=${apiKey}&${queryString}`
     );
     return response.data;
   },
@@ -369,6 +374,53 @@ export const apiService = {
   getResolvedAddress: async (apiKey, chainId, address) => {
     const response = await api.get(
       `/${chainId}/address/${address}/resolve_address/?key=${apiKey}`
+    );
+    return response.data;
+  },
+
+  // ========== BITCOIN ==========
+  getBitcoinBalances: async (apiKey, address, params = {}) => {
+    // Filter out path parameters
+    const { address: _, ...queryParams } = params;
+    // Bitcoin mainnet chain ID in Covalent
+    const bitcoinChainId = 'btc-mainnet';
+    const queryString = buildQueryString({
+      'quote-currency': queryParams.quoteCurrency || 'USD',
+      'nft': queryParams.nft || false,
+      'no-nft-fetch': queryParams.noNftFetch || false,
+      'no-spam': queryParams.noSpam || false,
+    });
+    const response = await api.get(
+      `/${bitcoinChainId}/address/${address}/balances_v2/?key=${apiKey}&${queryString}`
+    );
+    return response.data;
+  },
+
+  getBitcoinTransactions: async (apiKey, address, params = {}) => {
+    // Filter out path parameters
+    const { address: _, ...queryParams } = params;
+    const bitcoinChainId = 'btc-mainnet';
+    const queryString = buildQueryString({
+      'quote-currency': queryParams.quoteCurrency || 'USD',
+      'block-height': queryParams.blockHeight || '',
+      'page-size': queryParams.pageSize || 100,
+      'page-number': queryParams.pageNumber || 0,
+    });
+    const response = await api.get(
+      `/${bitcoinChainId}/address/${address}/transactions_v3/?key=${apiKey}&${queryString}`
+    );
+    return response.data;
+  },
+
+  getBitcoinTransactionByHash: async (apiKey, txHash, params = {}) => {
+    // Filter out path parameters
+    const { txHash: _, ...queryParams } = params;
+    const bitcoinChainId = 'btc-mainnet';
+    const queryString = buildQueryString({
+      'no-logs': queryParams.noLogs || false,
+    });
+    const response = await api.get(
+      `/${bitcoinChainId}/transaction_v2/${txHash}/?key=${apiKey}&${queryString}`
     );
     return response.data;
   },

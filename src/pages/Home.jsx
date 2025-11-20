@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   const apiCategories = [
-    { path: '/wallet', name: 'Wallet API', description: 'Multichain token balances, transfers and prices for a wallet', icon: '💰' },
+    { path: '/wallet', name: 'Wallet API', description: 'Multichain token balances, transfers and prices (spot and historical) for a wallet', icon: '💰' },
     { path: '/activity-feed', name: 'Activity Feed API', description: 'Multichain historical transactions with event logs and prices', icon: '📊' },
     { path: '/nfts', name: 'NFT API', description: 'Media assets, metadata, sales, owners, and trait filters', icon: '🖼️' },
+    { path: '/bitcoin', name: 'Bitcoin API', description: 'Bitcoin balances and transactions for x/y/zpub and non-HD addresses, including historical and spot prices', icon: '₿' },
     { path: '/security', name: 'Security API', description: 'NFT and ERC20 token allowances, including value-at-risk', icon: '🔒' },
     { path: '/block-explorer', name: 'Block Explorer API', description: 'Block details, event logs, gas prices, token prices & holders', icon: '🧱' },
-    { path: '/pricing-utility', name: 'Pricing & Utility API', description: 'Token prices (spot and historical), chain info and utilities', icon: '💵' },
   ];
 
   return (

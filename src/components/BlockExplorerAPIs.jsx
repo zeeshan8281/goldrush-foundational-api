@@ -91,6 +91,22 @@ const BlockExplorerAPIs = ({ apiKey }) => {
         onSubmit={(key, data) => apiService.getTokenHolders(key, data.chainId, data.contractAddress, data)}
         apiKey={apiKey}
       />
+
+      <ApiTestForm
+        title="Get All Chains"
+        description="Retrieve list of all supported chains"
+        fields={[]}
+        onSubmit={(key) => apiService.getAllChains(key)}
+        apiKey={apiKey}
+      />
+
+      <ApiTestForm
+        title="Get All Chain Statuses"
+        description="Get status information for all chains"
+        fields={[]}
+        onSubmit={(key) => apiService.getAllChainStatuses(key)}
+        apiKey={apiKey}
+      />
     </div>
   );
 };

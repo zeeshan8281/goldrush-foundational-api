@@ -19,9 +19,9 @@ const Layout = () => {
     { path: '/wallet', label: 'Wallet API', icon: '💰' },
     { path: '/activity-feed', label: 'Activity Feed API', icon: '📊' },
     { path: '/nfts', label: 'NFT API', icon: '🖼️' },
+    { path: '/bitcoin', label: 'Bitcoin API', icon: '₿' },
     { path: '/security', label: 'Security API', icon: '🔒' },
     { path: '/block-explorer', label: 'Block Explorer API', icon: '🧱' },
-    { path: '/pricing-utility', label: 'Pricing & Utility API', icon: '💵' },
   ];
 
   return (
